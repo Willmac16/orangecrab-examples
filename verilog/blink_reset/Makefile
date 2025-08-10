@@ -29,11 +29,14 @@ RM         = del
 PATH_SEP   = \\
 endif
 
+.PHONY: dense
+dense:
+	echo ${NEXTPNR_DENSITY}
 
 all: ${PROJ}.dfu
 
 dfu: ${PROJ}.dfu
-	dfu-util --alt 0 -D $<
+	dfu-util -w --alt 0 -D $<
 
 
 %.json: %.v

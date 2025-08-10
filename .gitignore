@@ -12,3 +12,5 @@ abc.history
 litex/build*
 
 tmp/
+
+*.swp
