@@ -2,6 +2,7 @@
 
 from amaranth import *
 from amaranth_boards.orangecrab_r0_2 import *
+import sys
 
 
 class Blink(Elaboratable):
@@ -18,14 +19,19 @@ class Blink(Elaboratable):
         blue_led = rgb.b
 
         m.d.comb += [
-            red_led.o.eq(self.count[27]),
-            green_led.o.eq(self.count[26]),
-            blue_led.o.eq(self.count[25]),
-        ]
+                red_led.o.eq(self.count[27]),
+                green_led.o.eq(self.count[26]),
+                blue_led.o.eq(self.count[25]),
+                ]
 
         return m
 
 
 if __name__ == "__main__":
     platform = OrangeCrabR0_2Platform()
+
+    if len(sys.argv) > 1:
+        if "85" in sys.argv[1]:
+            platform = OrangeCrabR0_2_85FPlatform()
+
     platform.build(Blink(), do_program=True)
